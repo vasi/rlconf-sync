@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+set -euo pipefail
+
+cmdline=$(< /etc/kernel/cmdline)
+
+tmp=$(mktemp /boot/.refind_linux.conf.XXXXXX)
+trap 'rm -f "$tmp"' EXIT
+
+cat <<EOF > "$tmp"
+"Boot with standard options" "$cmdline"
+"Boot to single-user mode" "$cmdline single"
+"Boot with minimal options" "${cmdline%% rhgb*}"
+EOF
+
+chmod 0644 "$tmp"
+mv -f "$tmp" /boot/refind_linux.conf
+
+trap - EXIT

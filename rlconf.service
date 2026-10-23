@@ -1,0 +1,6 @@
+[Unit]
+Description=Regenerate rEFInd Linux kernel options
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/update-rlconf

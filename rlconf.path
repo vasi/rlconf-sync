@@ -1,0 +1,9 @@
+[Unit]
+Description=Watch Fedora kernel command line for rEFInd
+
+[Path]
+PathChanged=/etc/kernel/cmdline
+Unit=rlconf.service
+
+[Install]
+WantedBy=multi-user.target
